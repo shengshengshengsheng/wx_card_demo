@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * description:
  *
- * @author xuqiangsheng
+ * @author shengsheng
  * @date 2021/1/5 20:06
  */
 @SpringBootApplication

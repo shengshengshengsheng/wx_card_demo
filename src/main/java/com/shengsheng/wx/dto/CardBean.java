@@ -2,6 +2,9 @@ package com.shengsheng.wx.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+/**
+ * @author shengsheng
+ */
 public class CardBean {
         /**
          * card_id : pbLatjk4T4Hx-QFQGL4zGQy27_Qg

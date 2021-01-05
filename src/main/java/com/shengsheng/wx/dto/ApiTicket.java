@@ -1,7 +1,7 @@
 package com.shengsheng.wx.dto;
 
 /**
- * @author xuqiangsheng
+ * @author shengsheng
  */
 public class ApiTicket extends BaseResponse {
     private String ticket;

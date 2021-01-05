@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * description:
  *
- * @author xuqiangsheng
+ * @author shengsheng
  * @date 2021/1/5 17:14
  */
 public class DecryptCode extends BaseResponse implements Serializable {

@@ -5,7 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 /**
  * description:
  *
- * @author xuqiangsheng
+ * @author shengsheng
  * @date 2021/1/5 18:11
  */
 public class CheckCodeResponse extends BaseResponse {

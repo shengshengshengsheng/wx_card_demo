@@ -3,7 +3,7 @@ package com.shengsheng.wx.dto;
 /**
  * description:
  *
- * @author xuqiangsheng
+ * @author shengsheng
  * @date 2021/1/5 20:26
  */
 public class AccessTokenResponse extends BaseResponse{
