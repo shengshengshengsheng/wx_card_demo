@@ -36,6 +36,11 @@ public class WeiXinService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    /**
+     * 小程序端wx.addCard获取签名
+     * @param cardId 优惠券id(微信提供)
+     * @return
+     */
     public Map<String, String> getCardSign(String cardId) {
         //获取ticket
         String apiTicket = getTicketForCard();
@@ -76,6 +81,10 @@ public class WeiXinService {
         return ret;
     }
 
+    /**
+     * 从redis或微信端获取ticket
+     * @return 取到的ticket
+     */
     private String getTicketForCard() {
         //从redis获取ticket
         String key = "wxTicketForWxCard_";
@@ -92,6 +101,10 @@ public class WeiXinService {
         return ticket;
     }
 
+    /**
+     * 从微信端获取ticket
+     * @return
+     */
     private String getTicketFromWx() {
         String accessToken = getAccessToken();
         RestTemplate restTemplate = new RestTemplate();
@@ -109,6 +122,10 @@ public class WeiXinService {
         return apiTicket.getTicket();
     }
 
+    /**
+     * 从redis或者微信端获取accessToken
+     * @return
+     */
     private String getAccessToken() {
         //从redis获取accessToken
         String key = "wxAccessToken_";
@@ -126,6 +143,10 @@ public class WeiXinService {
 
     }
 
+    /**
+     * 从微信端获取accessToken
+     * @return
+     */
     private String getAccessTokenFromWx() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<AccessTokenResponse> forEntity = restTemplate.getForEntity("https://api.weixin.qq" +
