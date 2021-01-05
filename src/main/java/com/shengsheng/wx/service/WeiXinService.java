@@ -37,7 +37,7 @@ public class WeiXinService {
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 小程序端wx.addCard获取签名
+     * 卡券-小程序端打通-小程序内领取卡券-获取签名
      * @param cardId 优惠券id(微信提供)
      * @return
      */
@@ -126,7 +126,7 @@ public class WeiXinService {
      * 从redis或者微信端获取accessToken
      * @return
      */
-    private String getAccessToken() {
+    public String getAccessToken() {
         //从redis获取accessToken
         String key = "wxAccessToken_";
         String accessToken;
