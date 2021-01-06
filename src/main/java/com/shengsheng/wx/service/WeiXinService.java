@@ -137,8 +137,10 @@ public class WeiXinService {
         if (response == null || response.getExpiresIn().compareTo(System.currentTimeMillis()) <= 0 || StringUtils.isBlank(response.getAccessToken())) {
             //从微信端获取accessToken
             accessToken = getAccessTokenFromWx();
+            logger.info("getAccessTokenFromWechat:{}",accessToken);
         } else {
             accessToken = response.getAccessToken();
+            logger.info("getAccessTokenFromRedis:{}",accessToken);
         }
         return accessToken;
 

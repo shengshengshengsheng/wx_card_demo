@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * @author xuqiangsheng
+ * @author shengsheng
  */
 public class ElementUtils {
     private Element root = null;
