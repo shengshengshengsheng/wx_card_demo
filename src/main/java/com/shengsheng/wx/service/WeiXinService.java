@@ -163,7 +163,7 @@ public class WeiXinService {
             return null;
         } else {
             String key = "wxAccessToken_";
-            stringRedisTemplate.opsForValue().set(key + "_jsapi", JSON.toJSONString(accessTokenResponse));
+            stringRedisTemplate.opsForValue().set(key, JSON.toJSONString(accessTokenResponse));
         }
         return accessTokenResponse.getAccessToken();
     }
