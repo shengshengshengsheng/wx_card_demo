@@ -3,6 +3,7 @@ package com.shengsheng.wx.service;
 import com.alibaba.fastjson.JSON;
 import com.shengsheng.wx.dto.AccessTokenResponse;
 import com.shengsheng.wx.dto.ApiTicket;
+import com.shengsheng.wx.utils.ElementUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -181,5 +182,108 @@ public class WeiXinService {
         String result = formatter.toString();
         formatter.close();
         return result;
+    }
+
+    public boolean verifyUrl(String signature, String timestamp, String nonce, String echostr) {
+        //在微信公众号后台配置的token
+        String accessToken = "token";
+        String[] param = new String[3];
+        param[0] = nonce;
+        param[1] = timestamp;
+        param[2] = accessToken;
+        //对参数的value值进行字符串的字典序排序
+        Arrays.sort(param);
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(param).forEach(sb::append);
+        String signTemp;
+        //对上面拼接的字符串进行sha1加密，得到signature
+        try {
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(sb.toString().getBytes(StandardCharsets.UTF_8));
+            signTemp = byteToHex(crypt.digest());
+            logger.info("verifyUrl_signature:{}",signature);
+            logger.info("verifyUrl_signTemp:{}",signTemp);
+            return signTemp.equalsIgnoreCase(signature);
+        } catch (NoSuchAlgorithmException e) {
+            logger.info("verifyUrl_error:", e);
+        }
+        return false;
+    }
+
+    public void handleWxCallBackMsg(String msg, String signature, String timestamp, String nonce, String echostr, String openid) {
+        try {
+            ElementUtils element = new ElementUtils(msg);
+            String msgType = element.get("MsgType");
+            switch (msgType){
+                case "text":
+                    //处理消息回调
+                    handleWxTextCallBack(element);
+                    break;
+                case "event":
+                    //处理事件回调
+                    handleWxEventCallBack(element);
+                    break;
+                default:
+                    break;
+            }
+        }catch (Exception e) {
+            logger.info("handleWxCallBackMsg_error:",e);
+        }
+    }
+
+    /**
+     * 处理事件回调
+     * @param element
+     */
+    private void handleWxEventCallBack(ElementUtils element) {
+        String event = element.get("Event");
+        switch (event){
+            //微信卡券-领取事件推送
+            case "user_get_card":
+                dealUserGetCardCallBack(element);
+                break;
+            //微信卡券-删除事件推送
+            case "user_del_card":
+                dealUserDelCardCallBack(element);
+                break;
+            //微信卡券-核销事件推送
+            case "user_consume_card":
+                dealUserConsumeCardCallBack(element);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 微信卡券-核销事件推送
+     * @param element
+     */
+    private void dealUserConsumeCardCallBack(ElementUtils element) {
+
+    }
+
+    /**
+     * 微信卡券-删除事件推送
+     * @param element
+     */
+    private void dealUserDelCardCallBack(ElementUtils element) {
+
+    }
+    /**
+     * 微信卡券-领取事件推送
+     * @param element
+     */
+    private void dealUserGetCardCallBack(ElementUtils element) {
+
+    }
+
+    /**
+     * 处理消息回调
+     * @param element
+     */
+    private void handleWxTextCallBack(ElementUtils element) {
+        //处理消息回调
     }
 }

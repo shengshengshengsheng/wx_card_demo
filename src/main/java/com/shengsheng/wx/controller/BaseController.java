@@ -13,5 +13,8 @@ public class BaseController {
 
         //微信-卡券-小程序端打通-小程序内领取卡券-获取签名
         public static final String GET_WX_CARD_SIGN = "/weixin/getCardSign";
+
+        //微信卡券-微信公众号消息回调
+        public static final String WEIXIN_CALLBACK = "/weixin/callback";
     }
 }
